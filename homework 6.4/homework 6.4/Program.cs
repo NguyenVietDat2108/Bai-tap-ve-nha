@@ -13,17 +13,23 @@ namespace homework_6._4
         {
             Console.WriteLine("Print interger:" + a);
         }
-        public static void Peform(IntAction act,int[]arr)
+        public static void Perform(IntAction act,int[]arr)
         {
-            Console.WriteLine("")
+            foreach( var a in arr)
+            {
+                act(a);
+            }
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            IntAction act;
+            IntAction act= TestDelegate.PrintInt;
             act(42);
+            int[] arr = { 1, 2, 3, 4, 5, 6 };
+            TestDelegate.Perform(TestDelegate.PrintInt, arr);
+
         }
     }
 }
