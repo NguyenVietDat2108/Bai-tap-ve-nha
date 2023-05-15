@@ -84,7 +84,11 @@ namespace homework_7._1
             for (int i = 0; i < number; i++)
             {
                 if (book[i].title == "Nhi Dong")
-                    book[i]= null;
+                {
+                    book.Remove(book[i]);
+                    number = number - 1;
+                }
+
             }
             }
     }
