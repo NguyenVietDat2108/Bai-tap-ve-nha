@@ -74,6 +74,24 @@ namespace Collection_and_Iterator
             {
                 Console.WriteLine(staff[item]);
             }
+
+            Department dep = new Department();
+            foreach(string item in dep)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        class Department: IEnumerable
+        {
+            string[] names = { "Finance", "Human Resource", "Information Technology", "Marketing" };
+            public IEnumerator GetEnumerator()
+            {
+                for(int i=0;i<names.Length;i++)
+                {
+                    yield return names[i];
+                }
+            }
+
         }
 
         public static void PrintValues(IEnumerable myList)
