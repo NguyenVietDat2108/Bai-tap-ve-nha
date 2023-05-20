@@ -8,9 +8,6 @@ namespace Anonymous_method
 {
     class Thread
     {
-        public Thread()
-        {
-        }
 
         public Thread(Action p)
         {

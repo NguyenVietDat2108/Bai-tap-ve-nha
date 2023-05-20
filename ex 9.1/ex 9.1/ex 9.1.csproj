@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{999665ED-5873-470E-A962-0172ADFB3C39}</ProjectGuid>
+    <ProjectGuid>{B714B590-9025-4633-8658-CADA8DD16096}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LINQ</RootNamespace>
-    <AssemblyName>LINQ</AssemblyName>
+    <RootNamespace>ex_9._1</RootNamespace>
+    <AssemblyName>ex 9.1</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComplexTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
