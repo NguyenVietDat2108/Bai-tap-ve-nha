@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
+using a= System.Threading;
 
 namespace ex_10._9
 {
@@ -13,16 +13,16 @@ namespace ex_10._9
             Console.WriteLine("\nQuan sat ket qua lap truyen thong");
             for (int i = 0; i <= 10; i++)
             {
-                Console.WriteLine("i = {0} executed by thread with ID {1}", i, Thread.CurrentThread.ManagedThreadId);
-                Thread.Sleep(200);
+                Console.WriteLine("i = {0} executed by thread with ID {1}", i, a.Thread.CurrentThread.ManagedThreadId);
+                a.Thread.Sleep(200);
             }
             Console.WriteLine("\nQuan sat ket qua lap song song");
 
-            System.Threading.Tasks.Parallel.For(0, 10, i =>
+            a.Tasks.Parallel.For(0, 10, i =>
             {
                 Console.WriteLine("i = {0} executed by thread with ID {1}",
-                i, Thread.CurrentThread.ManagedThreadId);
-                Thread.Sleep(200);
+                i, a.Thread.CurrentThread.ManagedThreadId);
+                a.Thread.Sleep(200);
             });
         }
     }
