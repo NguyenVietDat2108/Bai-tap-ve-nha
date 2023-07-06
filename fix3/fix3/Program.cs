@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections;
 
 namespace NguyenVietDat
 {
@@ -21,7 +20,7 @@ namespace NguyenVietDat
 
         public double Mark_AVG()
         {
-            return (Mark1 + Mark2 + Mark3 )/3;
+            return (Mark1 + Mark2 + Mark3) / 3;
         }
     }
     class TestStudent : Student
@@ -55,37 +54,38 @@ namespace NguyenVietDat
                     Console.WriteLine("Enter mark3:");
                     student1.Mark3 = Convert.ToInt32(Console.ReadLine());
                     student.Add(student1);
+
+                    if (
+                    student[i].Id == Convert.ToInt32(("")) |
+                    student[i].Name == "" |
+                    student[i].Gender == "" |
+                    student[i].Age == Convert.ToInt32(("")) |
+                    student[i].DateofBirth == null |
+                    student[i].Class == "" |
+                    student[i].Mark1 == Convert.ToInt32(("")) |
+                    student[i].Mark2 == Convert.ToInt32(("")) |
+                    student[i].Mark3 == Convert.ToInt32(("")) |
+                    student[i].Mark1 < 0 && student[i].Mark1 > 100 |
+                    student[i].Mark2 < 0 && student[i].Mark2 > 100 |
+                    student[i].Mark3 < 0 && student[i].Mark3 > 100
+                    )
+                    {
+                        TestStudent.Display(student);
+                        student.Remove(student[i]);
+                    }
                 }
             }
-            catch
+            catch (FormatException ex)
             {
-                Exception Error = new Exception("Wrong value,retry!");
-                for(int i=0;i<student.Count; i++)
-                {
-                    if (
-                        student[i].Id == Convert.ToInt32(null) | 
-                        student[i].Name == null | 
-                        student[i].Gender == null |
-                        student[i].Age == Convert.ToInt32(null) | 
-                        student[i].DateofBirth == null|
-                        student[i].Class == null | 
-                        student[i].Mark1 == Convert.ToInt32(null) | 
-                        student[i].Mark2 == Convert.ToInt32(null) | 
-                        student[i].Mark3 == Convert.ToInt32(null) |
-                        student[i].Mark1 < 0 && student[i].Mark1 > 100 |
-                        student[i].Mark2 < 0 && student[i].Mark2 > 100 |
-                        student[i].Mark3 < 0 && student[i].Mark3 > 100 
-                        )
-                        throw Error;
-                }
+                Console.WriteLine(ex.Message);
             }
         }
         public static void Display(List<Student> student)
         {
             foreach (var a in student)
             {
-                Console.WriteLine("Id:"+a.Id +" "+"Name:"+ a.Name + " " + "Gender:"+ a.Gender + 
-                    " " + "Age:"+a.Age + " " + "DateofBirth:"+a.DateofBirth.ToString("dd/MM/yyyy") + " " + "Class:"+ a.Class);
+                Console.WriteLine("Id:" + a.Id + " " + "Name:" + a.Name + " " + "Gender:" + a.Gender +
+                    " " + "Age:" + a.Age + " " + "DateofBirth:" + a.DateofBirth.ToString("dd/MM/yyyy") + " " + "Class:" + a.Class);
             }
         }
         public static void FindName(List<Student> student)
@@ -93,13 +93,13 @@ namespace NguyenVietDat
             Console.WriteLine("Enter name:");
             string name = Convert.ToString(Console.ReadLine());
             for (int i = 0; i < student.Count; i++)
-            {   
+            {
                 if (name == Convert.ToString(student[i].Name))
-                    {
-                          Console.WriteLine("Id:" + student[i].Id + " " + "Name:" + student[i].Name + " " + "Gender:" +
-                          student[i].Gender + " " + "Age:" + student[i].Age + " " + "DateofBirth:" + student[i].DateofBirth.ToString("dd/MM/yyyy") + " " + "Class:" + student[i].Class);
-                          break;
-                    }
+                {
+                    Console.WriteLine("Id:" + student[i].Id + " " + "Name:" + student[i].Name + " " + "Gender:" +
+                    student[i].Gender + " " + "Age:" + student[i].Age + " " + "DateofBirth:" + student[i].DateofBirth.ToString("dd/MM/yyyy") + " " + "Class:" + student[i].Class);
+                    break;
+                }
             }
         }
         public static void ChangeInfo(List<Student> student)
@@ -116,7 +116,7 @@ namespace NguyenVietDat
                 {
                     if (Convert.ToInt32(oldkey) == Convert.ToInt32(student[i].Id))
                     {
-                        student[i].Id = Convert.ToInt32(newkey) ;
+                        student[i].Id = Convert.ToInt32(newkey);
                         break;
                     }
                 }
@@ -204,7 +204,7 @@ namespace NguyenVietDat
                 {
                     if (Convert.ToInt32(oldkey) == Convert.ToInt32(student[i].Mark3))
                     {
-                        student[i].Mark3= Convert.ToInt32(newkey);
+                        student[i].Mark3 = Convert.ToInt32(newkey);
                         break;
                     }
                 }
@@ -229,20 +229,19 @@ namespace NguyenVietDat
             Student student1 = new Student();
             for (int i = 0; i < student.Count; i++)
             {
-                Console.WriteLine("i:" + i);
-                for (int j = i; j < student.Count; j++)
+                for (int j = i; j < student.Count - 1; j++)
                 {
-                    Console.WriteLine("j:" + j);
-                    if (student[j+1].Mark_AVG() < student[j].Mark_AVG())
-                    { 
-                        student1 = student[j+1];
-                        student[j+1] = student[j];
+                    if (student[j + 1].Mark_AVG() < student[j].Mark_AVG())
+                    {
+                        student1 = student[j + 1];
+                        student[j + 1] = student[j];
                         student[j] = student1;
                     }
                 }
             }
         }
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -254,44 +253,50 @@ namespace NguyenVietDat
             Console.WriteLine("4.Search Student by Name");
             Console.WriteLine("5.Delete Student by student ID.");
             Console.WriteLine("6.Exit program.");
-            
+            Console.WriteLine("7.Change the student's information.");
+
             List<Student> liststudent = new List<Student>();
-                 
-            if (1>0) 
-            { 
-               Label: Console.WriteLine("Option:");
-                int option= Convert.ToInt32(Console.ReadLine());
+
+            if (1 > 0)
+            {
+            Label: Console.WriteLine("Option:");
+                int option = Convert.ToInt32(Console.ReadLine());
                 if (option == 1)
-                    {
+                {
                     TestStudent.InputInfo(liststudent);
                     goto Label;
-                    }
-                    if (option == 2)
-                    {
-                        TestStudent.MarkOrder(liststudent);
-                        goto Label;
-                    }
-                    if (option == 3)
-                    {
-                        TestStudent.Display(liststudent);
-                        goto Label;
-                    }
-                    if (option == 4)
-                    {
-                        TestStudent.FindName(liststudent);
-                        goto Label;
-                    }
-                    if (option == 5)
-                    {
-                        TestStudent.RemoveId(liststudent);
-                        goto Label;
-                    }
-                    if (option == 6)
-                    {
-                        Console.WriteLine("Exit program");
-                    }
-               }
-            
+                }
+                if (option == 2)
+                {
+                    TestStudent.MarkOrder(liststudent);
+                    goto Label;
+                }
+                if (option == 3)
+                {
+                    TestStudent.Display(liststudent);
+                    goto Label;
+                }
+                if (option == 4)
+                {
+                    TestStudent.FindName(liststudent);
+                    goto Label;
+                }
+                if (option == 5)
+                {
+                    TestStudent.RemoveId(liststudent);
+                    goto Label;
+                }
+                if (option == 6)
+                {
+                    Console.WriteLine("Exit program");
+                }
+                if (option == 7)
+                {
+                    TestStudent.ChangeInfo(liststudent);
+                    goto Label;
+                }
+            }
+
 
         }
     }
