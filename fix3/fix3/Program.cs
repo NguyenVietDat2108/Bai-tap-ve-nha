@@ -57,15 +57,10 @@ namespace NguyenVietDat
 
                     if
                        (
-                       student1.Id != Convert.ToInt32(("")) &&
                        student1.Name != "" &&
                        student1.Gender != "" &&
-                       student1.Age != Convert.ToInt32(("")) &&
                        student1.DateofBirth != null &&
                        student1.Class != "" &&
-                       student1.Mark1 != Convert.ToInt32(("")) &&
-                       student1.Mark2 != Convert.ToInt32(("")) &&
-                       student1.Mark3 != Convert.ToInt32(("")) &&
                        student1.Mark1 >= 0 && student1.Mark1 <= 100 &&
                        student1.Mark1 >= 0 && student1.Mark1 <= 100 &&
                        student1.Mark1 >= 0 && student1.Mark1 <= 100
