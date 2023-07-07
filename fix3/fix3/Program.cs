@@ -268,7 +268,7 @@ namespace NguyenVietDat
             Console.WriteLine("4.Search Student by Name");
             Console.WriteLine("5.Delete Student by student ID.");
             Console.WriteLine("6.Exit program.");
-            Console.WriteLine("7.Change the student's information.");
+            //Console.WriteLine("7.Change the student's information.");
 
             List<Student> liststudent = new List<Student>();
 
@@ -305,11 +305,11 @@ namespace NguyenVietDat
                 {
                     Console.WriteLine("Exit program");
                 }
-                if (option == 7)
-                {
-                    TestStudent.ChangeInfo(liststudent);
-                    goto Label;
-                }
+                //if (option == 7)
+                //{
+                    //TestStudent.ChangeInfo(liststudent);
+                    //goto Label;
+                //}
             }
 
 
