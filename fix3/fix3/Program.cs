@@ -53,27 +53,29 @@ namespace NguyenVietDat
                     student1.Mark2 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Enter mark3:");
                     student1.Mark3 = Convert.ToInt32(Console.ReadLine());
-                    student.Add(student1);
 
-                    if (
-                    student[i].Id == Convert.ToInt32(("")) |
-                    student[i].Name == "" |
-                    student[i].Gender == "" |
-                    student[i].Age == Convert.ToInt32(("")) |
-                    student[i].DateofBirth == null |
-                    student[i].Class == "" |
-                    student[i].Mark1 == Convert.ToInt32(("")) |
-                    student[i].Mark2 == Convert.ToInt32(("")) |
-                    student[i].Mark3 == Convert.ToInt32(("")) |
-                    student[i].Mark1 < 0 && student[i].Mark1 > 100 |
-                    student[i].Mark2 < 0 && student[i].Mark2 > 100 |
-                    student[i].Mark3 < 0 && student[i].Mark3 > 100
-                    )
+
+                    if
+                       (
+                       student1.Id != Convert.ToInt32(("")) &&
+                       student1.Name != "" &&
+                       student1.Gender != "" &&
+                       student1.Age != Convert.ToInt32(("")) &&
+                       student1.DateofBirth != null &&
+                       student1.Class != "" &&
+                       student1.Mark1 != Convert.ToInt32(("")) &&
+                       student1.Mark2 != Convert.ToInt32(("")) &&
+                       student1.Mark3 != Convert.ToInt32(("")) &&
+                       student1.Mark1 >= 0 && student1.Mark1 <= 100 &&
+                       student1.Mark1 >= 0 && student1.Mark1 <= 100 &&
+                       student1.Mark1 >= 0 && student1.Mark1 <= 100
+                       )
                     {
-                        TestStudent.Display(student);
-                        student.Remove(student[i]);
+                        student.Add(student1);
                     }
+
                 }
+
             }
             catch (FormatException ex)
             {
@@ -85,7 +87,10 @@ namespace NguyenVietDat
             foreach (var a in student)
             {
                 Console.WriteLine("Id:" + a.Id + " " + "Name:" + a.Name + " " + "Gender:" + a.Gender +
-                    " " + "Age:" + a.Age + " " + "DateofBirth:" + a.DateofBirth.ToString("dd/MM/yyyy") + " " + "Class:" + a.Class);
+                    " " + "Age:" + a.Age + " " + "DateofBirth:" + a.DateofBirth.ToString("dd/MM/yyyy") + " " + "Class:" + a.Class + " " +
+                        "Mark1:" + a.Mark1 + " " +
+                        "Mark2:" + a.Mark2 + " " +
+                        "Mark3:" + a.Mark3);
             }
         }
         public static void FindName(List<Student> student)
@@ -96,8 +101,18 @@ namespace NguyenVietDat
             {
                 if (name == Convert.ToString(student[i].Name))
                 {
-                    Console.WriteLine("Id:" + student[i].Id + " " + "Name:" + student[i].Name + " " + "Gender:" +
-                    student[i].Gender + " " + "Age:" + student[i].Age + " " + "DateofBirth:" + student[i].DateofBirth.ToString("dd/MM/yyyy") + " " + "Class:" + student[i].Class);
+                    Console.WriteLine
+                        (
+                        "Id:" + student[i].Id + " " +
+                        "Name:" + student[i].Name + " " +
+                        "Gender:" + student[i].Gender + " " +
+                        "Age:" + student[i].Age + " " +
+                        "DateofBirth:" + student[i].DateofBirth.ToString("dd/MM/yyyy") + " " +
+                        "Class:" + student[i].Class + " " +
+                        "Mark1:" + student[i].Mark1 + " " +
+                        "Mark2:" + student[i].Mark2 + " " +
+                        "Mark3:" + student[i].Mark3
+                        );
                     break;
                 }
             }
