@@ -229,7 +229,7 @@ namespace NguyenVietDat
             {
                 if (id == Convert.ToInt32(student[i].Id))
                 {
-                    student.Remove(student[id]);
+                    student.Remove(student[i]);
                     break;
                 }
             }
