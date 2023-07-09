@@ -17,7 +17,14 @@ namespace test1
         public static double calculateDamage(List<double> damageArray)
         {
             Random a = new Random();
-            for (int i = 0; i < damageArray.Count(); i++)
+            Orderup(damageArray);
+            return (a.Next(Convert.ToInt32(Max(damageArray)),
+                Convert.ToInt32(Min(damageArray)))*1.0+a.NextDouble());
+        }
+    }
+    public static void Orderup(List<double> damageArray)
+    {
+        for (int i = 0; i < damageArray.Count(); i++)
             {
                 for (int j = i; j < damageArray.Count()-1; i++)
                 {
@@ -26,13 +33,31 @@ namespace test1
                         = (damageArray[j + 1], damageArray[j]);
                 }
             }
-            return (a.Next(Convert.ToInt32(damageArray[0]),
-                Convert.ToInt32(damageArray[damageArray.Count() - 1])))*1.0
-                +a.NextDouble();
-        }
+    }
+    public static double Max(List<double> damageArray)
+    {
+        int max=new int();
+        max=damageArray[0];
+      for (int i = 1; i < damageArray.Count(); i++)
+            {
+               if(damageArray[i]>max)
+               max=damageArray[i];
+            }
+            return max;
+    }
+    public static double Min(List<double> damageArray)
+    {
+        int min=new int();
+        min=damageArray[0];
+      for (int i = 1; i < damageArray.Count(); i++)
+            {
+               if(damageArray[i]>min)
+               min=damageArray[i];
+            }
+            return min;
     }
 
-    class TestEnemy : Enemy
+    class TestEnemy
     {
         public static void InputInfo(List<Enemy> enemy)
         {
@@ -60,22 +85,8 @@ namespace test1
                     }
                     List<double> damageArray1 = new List<double>();
 
-                    for(int m=0;m< enemy1.damageArray.Count();m++)
-                    {
-                        damageArray1[m] = enemy1.damageArray[m];
-                    }
-                    for (int i1 = 0; i1 < damageArray1.Count(); i1++)
-                    {
-                        for (int j1 = i1; j1 < damageArray1.Count()-1; j1++)
-                        {
-                            if (damageArray1[j1] > damageArray1[j1 + 1])
-                                (damageArray1[j1], damageArray1[j1 + 1])
-                                = (damageArray1[j1 + 1], damageArray1[j1]);
-                        }
-                    }
-
-                    enemy1.MinDamage = damageArray1[0];
-                    enemy1.MaxDamage = damageArray1[damageArray1.Count() - 1];
+                    enemy1.MinDamage = Min(damageArray1);
+                    enemy1.MaxDamage = Max(damageArray1);
 
                     if (enemy1.Name != "" &&
                         enemy1.MinDamage < enemy1.MaxDamage &&
