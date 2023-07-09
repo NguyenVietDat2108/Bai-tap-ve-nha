@@ -13,52 +13,65 @@ namespace test1
         public double Health;
         public double MinDamage;
         public double MaxDamage;
-        public List<double> damageArray=new List<double>();
+        public List<double> damageArray = new List<double>();
         public static double calculateDamage(List<double> damageArray)
         {
             Random a = new Random();
-            Orderup(damageArray);
-            return (a.Next(Convert.ToInt32(Max(damageArray)),
-                Convert.ToInt32(Min(damageArray)))*1.0+a.NextDouble());
+            return (a.Next(Convert.ToInt32(TestEnemy.Min(damageArray)),
+                Convert.ToInt32(TestEnemy.Min(damageArray))) * 1.0
+                + a.NextDouble());
         }
     }
-    public static void Orderup(List<double> damageArray)
+    
+    class TestEnemy
     {
-        for (int i = 0; i < damageArray.Count(); i++)
+        public static void OrderUp(List<double> damageArray)
+        {
+            for (int i = 0; i < damageArray.Count(); i++)
             {
-                for (int j = i; j < damageArray.Count()-1; i++)
+                for (int j = i; j < damageArray.Count() - 1; i++)
                 {
                     if (damageArray[j] > damageArray[j + 1])
                         (damageArray[j], damageArray[j + 1])
                         = (damageArray[j + 1], damageArray[j]);
                 }
             }
-    }
-    public static double Max(List<double> damageArray)
-    {
-        int max=new int();
-        max=damageArray[0];
-      for (int i = 1; i < damageArray.Count(); i++)
+        }
+        public static double Min(List<double> damageArray)
+        {
+            double min = damageArray[0];
+            for (int i = 0; i < damageArray.Count(); i++)
             {
-               if(damageArray[i]>max)
-               max=damageArray[i];
-            }
-            return max;
-    }
-    public static double Min(List<double> damageArray)
-    {
-        int min=new int();
-        min=damageArray[0];
-      for (int i = 1; i < damageArray.Count(); i++)
-            {
-               if(damageArray[i]>min)
-               min=damageArray[i];
+                if (damageArray[i] < min)
+                    min = Convert.ToInt32(damageArray[i]);
             }
             return min;
-    }
-
-    class TestEnemy
-    {
+        }
+        public static double Max(List<double> damageArray)
+        {
+            double max = damageArray[0];
+            for (int i = 0; i < damageArray.Count(); i++)
+            {
+                if (damageArray[i] > max)
+                    max = Convert.ToInt32(damageArray[i]);
+            }
+            return max;
+        }
+        public static List<double> DamageAVG(List<Enemy> enemy)
+        {
+            List<double> damageAVG = new List<double>();
+            
+            for (int i = 0; i < enemy.Count(); i++)
+            {
+                double totaldamage = 0;
+                for (int j = 0; j < enemy[i].damageArray.Count(); j++)
+                {
+                    totaldamage = totaldamage + enemy[i].damageArray[j];
+                }
+                damageAVG.Add((totaldamage / enemy[i].damageArray.Count()));
+            }
+            return damageAVG;
+        }
         public static void InputInfo(List<Enemy> enemy)
         {
             Console.WriteLine("Enter the number of enemies:");
@@ -67,7 +80,8 @@ namespace test1
             for (int i = 0; i < number; i++)
             {
                 try
-                {   Enemy enemy1 = new Enemy();
+                {
+                    Enemy enemy1 = new Enemy();
                     Console.WriteLine("Enter id:");
                     enemy1.Id = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Enter name:");
@@ -81,18 +95,18 @@ namespace test1
                     {
                         Console.WriteLine("Enter damage:");
                         var damage = Convert.ToDouble(Console.ReadLine());
-                        enemy1.damageArray.Add(damage) ;
+                        enemy1.damageArray.Add(damage);
                     }
                     List<double> damageArray1 = new List<double>();
 
-                    enemy1.MinDamage = Min(damageArray1);
-                    enemy1.MaxDamage = Max(damageArray1);
+                    enemy1.MinDamage = TestEnemy.Min(enemy1.damageArray); ;
+                    enemy1.MaxDamage = TestEnemy.Max(enemy1.damageArray);
 
                     if (enemy1.Name != "" &&
-                        enemy1.MinDamage < enemy1.MaxDamage &&
+                        enemy1.MinDamage <= enemy1.MaxDamage &&
                         enemy1.MinDamage > 0 &&
                         enemy1.MaxDamage < 100)
-                    { enemy.Add(enemy1); }
+                      { enemy.Add(enemy1); }
                     else { Console.WriteLine("Wrong Input!"); }
                 }
                 catch (Exception ex)
@@ -165,16 +179,16 @@ namespace test1
             }
             if (choose == 4)
             {
-                for(int j = 0; j < enemy.Count(); j++) 
-                { 
-                for (int i = 0; i < enemy[j].damageArray.Count(); i++)
+                for (int j = 0; j < enemy.Count(); j++)
                 {
-                    if (Convert.ToDouble(oldone) == enemy[i].damageArray[i])
+                    for (int i = 0; i < enemy[j].damageArray.Count(); i++)
                     {
-                        enemy[i].damageArray[i] = Convert.ToDouble(newone);
-                        Console.WriteLine("Success");
+                        if (Convert.ToDouble(oldone) == enemy[j].damageArray[i])
+                        {
+                            enemy[j].damageArray[i] = Convert.ToDouble(newone);
+                            Console.WriteLine("Success");
+                        }
                     }
-                }
                 }
             }
         }
@@ -186,7 +200,7 @@ namespace test1
             }
             else
             {
-                for(int i=0;i<enemy.Count();i++)
+                for (int i = 0; i < enemy.Count(); i++)
                 {
                     Console.WriteLine
                             (
@@ -219,29 +233,17 @@ namespace test1
         }
         public static void AscendingDamageAVG(List<Enemy> enemy)
         {
-            List<double> damageAVG = new List<double>();
-            double totaldamage = new double();
-
-            for(int i=0;i<enemy.Count();i++)
-            {
-                for(int j=0;j<enemy[i].damageArray.Count();j++)
-                {
-                    totaldamage = totaldamage + enemy[i].damageArray[j];
-                }
-                damageAVG.Add((totaldamage / enemy[i].damageArray.Count()));
-            }
-
+            List<double> damageAVG = TestEnemy.DamageAVG(enemy);
             Enemy subenemy = new Enemy();
-
-            for(int i=0;i<enemy.Count();i++)
-            { 
-                for(int j=i;j<enemy.Count()-1;j++)
+            for (int i = 0; i < enemy.Count(); i++)
+            {
+                for (int j = i; j < enemy.Count() - 1; j++)
                 {
                     if (damageAVG[j] > damageAVG[j + 1])
                     {
                         (damageAVG[j], damageAVG[j + 1]) = (damageAVG[j + 1], damageAVG[j]);
-                        subenemy = enemy[j+1];
-                        enemy[j + 1] = enemy[j];
+                        subenemy = enemy[j + 1];
+                        enemy[j + 1] = enemy[j]; 
                         enemy[j] = subenemy;
                     }
                 }
@@ -254,13 +256,14 @@ namespace test1
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("1. Nhập thông tin Enemy.");
             Console.WriteLine("2. Sắp xếp danh sách Enemy theo sát thương trung bình.");
             Console.WriteLine("3. Hiển thị tất cả các Enemy.");
             Console.WriteLine("4. Tìm kiếm Enemy theo tên.");
             Console.WriteLine("5. Xoá Enemy theo Id.");
             Console.WriteLine("6. Thoát chương trình.");
-            /*Console.WriteLine("7.Change enemy's information:");*/
+            Console.WriteLine("7.Change enemy's information:");
             List<Enemy> enemy = new List<Enemy>();
             List<double> damageArray = new List<double>();
             if (1 > 0)
@@ -297,11 +300,11 @@ namespace test1
                 {
                     Console.WriteLine("Exit program.");
                 }
-                /*if (choose == 7)
+                if (choose == 7)
                 {
                     TestEnemy.ChangeEnemyInfo(enemy);
                     goto Label;
-                }*/
+                }
 
             }
         }
