@@ -74,8 +74,13 @@ namespace test2
             List<Student> student1 = new List<Student>();
             foreach (var key in StudentHashtable.Keys)
                 {
-                if (StudentHashtable[key].StudName == Convert.ToString(enteredName))
-                    student1.Add(StudentHashtable[key]);
+                string[] arrayString = StudentHashtable[key].StudName.Split(' ');
+                for (int i = 0; i < arrayString.Length; i++)
+                {
+                    Console.WriteLine("arrayString:" + arrayString[i]);
+                    if (enteredName == arrayString[i])
+                        student1.Add(StudentHashtable[key]);
+                }
             }
             student1.Sort((x, y) => string.Compare(x.StudName, y.StudName));
             return student1;
@@ -145,16 +150,25 @@ namespace test2
                 if (choose == 4) 
                 {
                     Console.WriteLine("Choose: Id(1), Name(2), Class(3)");
-                    if (Convert.ToInt32(Console.ReadLine()) == 1)
+                    int choose1 = Convert.ToInt32(Console.ReadLine());
+                    if (choose1 == 1)
+                    {
                         Console.WriteLine("Enter:");
                         SearchStudentById(Convert.ToInt32(Console.ReadLine()));
-                    if (Convert.ToInt32(Console.ReadLine()) == 2)
+                        goto Label;
+                    }
+                    if (choose1 == 2)
+                    {
                         Console.WriteLine("Enter:");
-                       PrintAllStudents( SearchStudentByName(Convert.ToString(Console.ReadLine())));
-                    if (Convert.ToInt32(Console.ReadLine()) == 3)
+                        PrintAllStudents(SearchStudentByName(Convert.ToString(Console.ReadLine())));
+                        goto Label;
+                    }
+                    if (choose1 == 3)
+                    {
                         Console.WriteLine("Enter:");
-                       PrintAllStudents(SearchStudentByClass(Convert.ToString(Console.ReadLine())));
-                    goto Label;
+                        PrintAllStudents(SearchStudentByClass(Convert.ToString(Console.ReadLine())));
+                        goto Label;
+                    }
                 }
                 if (choose == 5)
                 {
