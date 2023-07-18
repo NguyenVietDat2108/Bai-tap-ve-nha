@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace test2
 {
@@ -11,30 +9,28 @@ namespace test2
     {
         public Dictionary<int, Student> StudentHashtable = new Dictionary<int, Student>();
 
-        public string[] PrintedOutput = new string[33];
+        public List<string> PrintedOutput = new List<string>();
 
         public bool IsRunning { get; set; }
         public void PrintAllStudents()
         {
-            for (int i = 0; i < StudentHashtable.Count(); i++)
+            foreach(var key in StudentHashtable.Keys)
             {
-                PrintedOutput[i] = StudentHashtable[i].Print(1);
-                Console.WriteLine("Student {0}:", i + 1, " ");
-                StudentHashtable[i].Print();
+                PrintedOutput.Add(StudentHashtable[key].Print(1));
+                StudentHashtable[key].Print();
             }
         }
         public void PrintAllStudents(List<Student> StudentHashtable)
         {
-            for (int i = 0; i < StudentHashtable.Count(); i++)
+            foreach (var key in StudentHashtable)
             {
-                Console.WriteLine("Student {0}:", i + 1, " ");
-                StudentHashtable[i].Print();
+                key.Print();
             }
         }
         private void AddStudent()
         {
             Student student = InputStudent();
-            StudentHashtable.Add(StudentHashtable.Count(), student);
+            StudentHashtable.Add(student.StudID, student);
         }
         private Student InputStudent()
         {
@@ -60,15 +56,15 @@ namespace test2
         }
         public void AddStudent(Student student)
         {
-            StudentHashtable.Add(StudentHashtable.Count, student);
+            StudentHashtable.Add(student.StudID, student);
         }
         public Student SearchStudentById(int enteredId)
         {
             List<Student> student1 = new List<Student>();
-            for (int i = 0; i < StudentHashtable.Count(); i++)
+            foreach (var key in StudentHashtable.Keys)
             {
-                if (StudentHashtable[i].StudID == Convert.ToInt32(enteredId))
-                    student1.Add(StudentHashtable[i]);
+                if (StudentHashtable[key].StudID == Convert.ToInt32(enteredId))
+                    student1.Add(StudentHashtable[key]);
             }
             student1.Sort((x, y) => string.Compare(x.StudName, y.StudName));
             return student1[0];
@@ -76,10 +72,10 @@ namespace test2
         public List<Student> SearchStudentByName(string enteredName)
         {
             List<Student> student1 = new List<Student>();
-            for (int i = 0; i < StudentHashtable.Count(); i++)
-            {
-                if (StudentHashtable[i].StudName == Convert.ToString(enteredName))
-                    student1.Add(StudentHashtable[i]);
+            foreach (var key in StudentHashtable.Keys)
+                {
+                if (StudentHashtable[key].StudName == Convert.ToString(enteredName))
+                    student1.Add(StudentHashtable[key]);
             }
             student1.Sort((x, y) => string.Compare(x.StudName, y.StudName));
             return student1;
@@ -87,10 +83,10 @@ namespace test2
         public List<Student> SearchStudentByClass(string enteredClass)
         {
             List<Student> student1 = new List<Student>();
-            for (int i = 0; i < StudentHashtable.Count(); i++)
-            {
-                if (StudentHashtable[i].StudClass == Convert.ToString(enteredClass))
-                    student1.Add(StudentHashtable[i]);
+            foreach (var key in StudentHashtable.Keys)
+                {
+                if (StudentHashtable[key].StudClass == Convert.ToString(enteredClass))
+                    student1.Add(StudentHashtable[key]);
             }
             student1.Sort((x, y) => string.Compare(x.StudName, y.StudName));
             return student1;

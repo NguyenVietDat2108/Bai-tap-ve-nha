@@ -14,21 +14,12 @@ namespace test2
 
         public void Print()
         {
-            Console.WriteLine("ID:" + StudID + "  " +
-                "Name:" + StudName + "  " +
-                "Gender" + StudGender + "  " +
-                "Age:" + StudAge + "  " +
-                "Class:" + StudClass 
-                );
+            Console.WriteLine(Convert.ToString(StudID) + ". " + StudName + " - " + StudGender + " - " + Convert.ToString(StudAge) + " - " + StudClass);
         }
         public string Print(int a)
         {
-            return("ID:" + StudID + "  " +
-                "Name:" + StudName + "  " +
-                "Gender" + StudGender + "  " +
-                "Age:" + StudAge + "  " +
-                "Class:" + StudClass
-                );
+            string Studentstring=  (Convert.ToString(StudID) +". " + StudName +" - "+ StudGender + " - " + Convert.ToString(StudAge)+ " - " + StudClass );
+            return Studentstring;
         }
         public void PrintAvgMark()
         {
